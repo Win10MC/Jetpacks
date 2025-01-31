@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.win10mc.jetpacks.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "AccessorLivingEntity"
+  ],
+  "client": [
+    "AccessorLivingEntity"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

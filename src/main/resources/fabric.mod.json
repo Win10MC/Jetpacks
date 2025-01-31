@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "jetpacks",
+  "version": "${version}",
+  "name": "Jetpacks",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/jetpacks/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "com.win10mc.jetpacks.client.JetpacksClient"
+    ],
+    "main": [
+      "com.win10mc.jetpacks.Jetpacks"
+    ]
+  },
+  "mixins": [
+    "jetpacks.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
