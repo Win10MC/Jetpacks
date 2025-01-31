@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import org.lwjgl.glfw.GLFW;
 
@@ -36,7 +37,7 @@ public class JetpacksClient implements ClientModInitializer {
 					int screenHeight = client.getWindow().getScaledHeight();
 
 					double[] jetpackEnabledText = {5, screenHeight / 2};
-					drawContext.drawText(MinecraftClient.getInstance().textRenderer, "Jetpack Engine: " + jetpack.engineStatus(), ((int) jetpackEnabledText[0]), ((int) jetpackEnabledText[1]), 0xFFFFFF, false);
+					drawContext.drawText(MinecraftClient.getInstance().textRenderer, "Jetpack Engine: " + jetpack.engineStatus(player.getEquippedStack(EquipmentSlot.CHEST)), ((int) jetpackEnabledText[0]), ((int) jetpackEnabledText[1]), 0xFFFFFF, false);
 				}
 			}
 		}));

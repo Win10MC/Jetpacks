@@ -13,6 +13,9 @@
     "client": [
       "com.win10mc.jetpacks.client.JetpacksClient"
     ],
+    "fabric-datagen": [
+      "com.win10mc.jetpacks.JetpackDataGen"
+    ],
     "main": [
       "com.win10mc.jetpacks.Jetpacks"
     ]
