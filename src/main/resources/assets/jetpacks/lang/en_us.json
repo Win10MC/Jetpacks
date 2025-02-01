@@ -4,5 +4,8 @@
   "item.jetpacks.iron_jetpack": "Iron Jetpack",
   "item.jetpacks.gold_jetpack": "Gold Jetpack",
   "item.jetpacks.diamond_jetpack": "Diamond Jetpack",
-  "item.jetpacks.netherite_jetpack": "Netherite Jetpack"
+  "item.jetpacks.netherite_jetpack": "Netherite Jetpack",
+
+  "category.jetpacks.jetpack": "Jetpacks",
+  "key.jetpacks.toggle_jetpack": "Toggle Jetpack"
 }

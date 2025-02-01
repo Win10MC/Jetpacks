@@ -108,7 +108,6 @@ public class JetpackItem extends ArmorItem {
 						stack.set(ModDataComponentTypes.FLYINGTIME, 0);
 					}
 					stack.set(ModDataComponentTypes.FLYINGTIME, stack.get(ModDataComponentTypes.FLYINGTIME) + 1);
-					System.out.println(stack.get(ModDataComponentTypes.FLYINGTIME));
 
 					if (stack.get(ModDataComponentTypes.FLYINGTIME) >= DAMAGE_INTERVAL) {
 						if (stack.getDamage() + 1 == stack.getMaxDamage()) {
