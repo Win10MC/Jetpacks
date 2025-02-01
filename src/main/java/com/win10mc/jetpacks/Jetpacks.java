@@ -15,5 +15,6 @@ public class Jetpacks implements ModInitializer {
 	public void onInitialize() {
 		ModItems.registerItems();
 		ModDataComponentTypes.registerDataComponentTypes();
+		ModCategories.register();
 	}
 }

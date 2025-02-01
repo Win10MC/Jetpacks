@@ -16,6 +16,9 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
 	@Override
 	protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
 		getOrCreateTagBuilder(ItemTags.ARMOR_ENCHANTABLE)
-				.add(ModItems.JETPACK);
+				.add(ModItems.IRON_JETPACK)
+				.add(ModItems.GOLD_JETPACK)
+				.add(ModItems.DIAMOND_JETPACK)
+				.add(ModItems.NETHERITE_JETPACK);
 	}
 }

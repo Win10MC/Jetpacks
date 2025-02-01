@@ -32,7 +32,7 @@ public class JetpacksClient implements ClientModInitializer {
 			PlayerEntity player = MinecraftClient.getInstance().player;
 			if (player != null) {
 				JetpackItem jetpack = JetpackItem.getEquippedJetpack(player);
-				if (jetpack != null) {
+				if (jetpack != null && !player.isInCreativeMode()) {
 					int screenWidth = client.getWindow().getScaledWidth();
 					int screenHeight = client.getWindow().getScaledHeight();
 
