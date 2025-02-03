@@ -1,14 +1,20 @@
 package com.win10mc.jetpacks.client;
 
 import com.win10mc.jetpacks.item.JetpackItem;
+import com.win10mc.jetpacks.network.EnableJetpackPacket;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.network.packet.CustomPayload;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
@@ -28,6 +34,19 @@ public class JetpacksClient implements ClientModInitializer {
 				GLFW.GLFW_KEY_R,
 				"category.jetpacks.jetpack"
 		));
+
+		ClientTickEvents.END_CLIENT_TICK.register(minecraftClient -> {
+			if (toggleJetpack.wasPressed()) {
+				PlayerEntity player = MinecraftClient.getInstance().player;
+				if (player != null) {
+					JetpackItem jetpack = JetpackItem.getEquippedJetpack(player);
+					if (jetpack != null) {
+						ClientPlayNetworking.send(EnableJetpackPacket.instance);
+					}
+				}
+				while(toggleJetpack.wasPressed()) { }
+			}
+		});
 
 		HudRenderCallback.EVENT.register((drawContext, renderTickCounter) -> {
 			PlayerEntity player = MinecraftClient.getInstance().player;

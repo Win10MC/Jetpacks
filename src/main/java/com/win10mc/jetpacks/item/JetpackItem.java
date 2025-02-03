@@ -2,6 +2,8 @@ package com.win10mc.jetpacks.item;
 
 import com.win10mc.jetpacks.component.ModDataComponentTypes;
 import com.win10mc.jetpacks.mixin.AccessorLivingEntity;
+import com.win10mc.jetpacks.network.EnableJetpackPacket;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
@@ -19,7 +21,7 @@ import net.minecraft.world.World;
 
 public class JetpackItem extends ArmorItem {
 
-	private boolean airborne = true;
+	private static boolean airborne = true;
 	private double currentSpeed = 0;
 	private boolean onGround = false;
 
@@ -49,7 +51,7 @@ public class JetpackItem extends ArmorItem {
 		this.sinkSpeed = descentSpeed / 2;
 	}
 
-	public void toggle(ItemStack stack) {
+	public static void toggle(ItemStack stack) {
 		boolean enabled = stack.get(ModDataComponentTypes.ENABLED);
 
 		if (enabled) {
@@ -63,8 +65,6 @@ public class JetpackItem extends ArmorItem {
 			airborne = true;
 		}
 	}
-
-
 
 	public boolean engineStatus(ItemStack stack) {
 		return stack.get(ModDataComponentTypes.ENABLED);
@@ -87,9 +87,7 @@ public class JetpackItem extends ArmorItem {
 		UNBREAKING_BONUS = Math.max(1, UNBREAKING_LEVEL / 1.5f);
 		DAMAGE_INTERVAL = 200 * UNBREAKING_BONUS;
 
-		if (stack.get(ModDataComponentTypes.ENABLED) == null) {
-			stack.set(ModDataComponentTypes.ENABLED, false);
-		}
+		stack.getOrDefault(ModDataComponentTypes.ENABLED, false);
 		boolean enabled = stack.get(ModDataComponentTypes.ENABLED);
 
 		if (slot == EquipmentSlot.CHEST.getEntitySlotId()) {
@@ -104,8 +102,8 @@ public class JetpackItem extends ArmorItem {
 				}
 
 				if (airborne) {
-					float flyingTime = stack.getOrDefault(ModDataComponentTypes.FLYINGTIME, 0);
-					stack.set(ModDataComponentTypes.FLYINGTIME, stack.get(ModDataComponentTypes.FLYINGTIME) + 1);
+					int flyingTime = stack.getOrDefault(ModDataComponentTypes.FLYINGTIME, 0);
+					stack.set(ModDataComponentTypes.FLYINGTIME, flyingTime + 1);
 
 					if (flyingTime >= DAMAGE_INTERVAL) {
 						if (stack.getDamage() + 1 == stack.getMaxDamage()) {
@@ -155,8 +153,8 @@ public class JetpackItem extends ArmorItem {
 				}
 			}
 			player.fallDistance = 0;
-		} else {
-			stack.set(ModDataComponentTypes.ENABLED, false);
+		} else if (engineStatus(stack)){
+			toggle(stack);
 		}
 	}
 }
