@@ -104,17 +104,15 @@ public class JetpackItem extends ArmorItem {
 				}
 
 				if (airborne) {
-					if (stack.get(ModDataComponentTypes.FLYINGTIME) == null) {
-						stack.set(ModDataComponentTypes.FLYINGTIME, 0);
-					}
+					float flyingTime = stack.getOrDefault(ModDataComponentTypes.FLYINGTIME, 0);
 					stack.set(ModDataComponentTypes.FLYINGTIME, stack.get(ModDataComponentTypes.FLYINGTIME) + 1);
 
-					if (stack.get(ModDataComponentTypes.FLYINGTIME) >= DAMAGE_INTERVAL) {
+					if (flyingTime >= DAMAGE_INTERVAL) {
 						if (stack.getDamage() + 1 == stack.getMaxDamage()) {
-							stack.setDamage(stack.getDamage() + 1);
+							stack.damage(1, player, EquipmentSlot.CHEST);
 							toggle(stack);
 						} else {
-							stack.setDamage(stack.getDamage() + 1);
+							stack.damage(1, player, EquipmentSlot.CHEST);
 						}
 						stack.set(ModDataComponentTypes.FLYINGTIME, 0);
 					}
